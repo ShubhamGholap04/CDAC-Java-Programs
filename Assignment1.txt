@@ -1,0 +1,461 @@
+1. Write a program to read n integers into an array. Calculate and display the sum of all elements and their average.
+
+import java.util.Scanner;
+
+public class Average
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Enter n:");
+        int n = sc.nextInt();
+
+        int a[] = new int[n];
+        int sum = 0 ;
+
+        System.out.println("Enter "+n+" integers:");
+
+        for(int i=0 ; i<n ; i++)
+        {
+            a[i] = sc.nextInt();
+            sum = sum + a[i];
+        }
+
+        double average = (double) sum/n;
+
+        System.out.println("sum is: " + sum);
+        System.out.println("average is: " + average);
+        sc.close();
+    }
+}
+
+2. Write a program to read n integers into an array and count how many elements are even and how many are odd.
+
+import java.util.Scanner;
+
+public class EvenandOdd 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter an integer n:");
+
+        int n = sc.nextInt();
+
+        int a[] = new int[n];
+
+        int evenCount = 0;
+
+        int oddCount = 0;
+        
+        System.out.println("Enter "+n+" integers:");
+
+        for(int i=0 ; i<n ; i++)
+        {
+            a[i] = sc.nextInt();
+
+            if (a[i]%2==0)
+            {
+                evenCount++;
+            }
+            else
+            {
+                oddCount++;
+            }
+
+        }
+        System.out.println("evenCount are: " +evenCount);
+        
+        System.out.println("oddCount are: " +oddCount);
+
+        sc.close();
+    }    
+}
+
+3. Write a program to find the largest and smallest element in an array.
+
+import java.util.Scanner;
+
+public class Largest_Smallest 
+{
+    public static void main(String[] args) 
+    {
+        
+    Scanner sc = new Scanner(System.in);
+
+    System.out.println("Enter an integer n:");
+
+        int n = sc.nextInt();
+
+        int a[] = new int[n];
+
+        System.out.println("Enter "+n+" integers:");
+
+        for(int i=0 ; i<n ; i++)
+        {
+            a[i]=sc.nextInt();
+        }
+        
+        int largest= a[0];
+
+        int smallest= a[0];
+
+        for(int i=1; i<n; i++)
+        {
+            if(a[i] > largest)
+            {
+                largest=a[i];
+            }
+            if(a[i] < smallest)
+            {
+                smallest=a[i];
+            }
+        }
+
+        System.out.println("largest is:" + largest);
+        System.out.println("smallest is:" + smallest);
+        sc.close();
+
+    }
+
+}
+
+4. Write a program to reverse the elements of an array without creating a second array.
+
+import java.util.Scanner;
+
+public class ArrayReversing_InPlace
+{
+    public static void main(String[] args)
+    {
+        int a[];
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter an integer n:");
+        int n = sc.nextInt();
+        a = new int[n];
+
+        for(int i = 0; i < a.length; i++)
+        {
+            System.out.print("\nEnter element for a[" + i + "]:");
+            a[i] = sc.nextInt();
+        }
+
+        System.out.print("\nEntered elements in reverse order are \n");
+        
+        // Reversed for loop: starts at last index and goes down to 0
+        for(int i = a.length - 1; i >= 0; i--)
+        {
+            System.out.print("\na[" + i + "]:" + a[i]);
+        }
+        
+        sc.close();
+    }
+}
+
+5. Write a program to read an array and a key value. Search for the key using Linear Search.
+
+import java.util.Scanner;
+
+public class LinearSearch
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter an integer n:");
+        int n = sc.nextInt();
+
+        int a[] = new int[n];
+
+        System.out.println("Enter " + n + " integers:");
+
+        for(int i = 0; i < a.length; i++)
+        {
+            a[i] = sc.nextInt();
+        }
+
+        System.out.println("Enter key value:");
+        int key = sc.nextInt();
+
+        boolean found = false;
+
+        for(int i = 0; i < a.length; i++)
+        {
+            if(a[i] == key)
+            {
+                System.out.println("Key found at index: " + i);
+                found = true;
+                break;
+            }
+        }
+
+        if(found == false)
+        {
+            System.out.println("Key not found");
+        }
+
+        sc.close();
+    }
+}
+
+6. Write a program to read a positive integer and calculate the sum of all its digits.
+
+import java.util.Scanner;
+
+public class Sum_Of_Digits 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter an interger n:");
+        
+        int n = sc.nextInt();
+        
+        int sum = 0;
+        
+        while(n > 0)
+        {
+            sum = sum + n % 10;
+            n = n /10;
+        }
+        System.out.print("sum =" + sum);
+        sc.close();
+    }    
+}
+
+7. Write a program to read a line of text and count the number of vowels and consonants present in it.
+
+import java.util.Scanner;
+
+public class VowelConsonant
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a line: ");
+        String s = sc.nextLine();
+
+        int vowel = 0, consonant = 0;
+
+        for(int i = 0; i < s.length(); i++)
+        {
+            char ch = s.charAt(i);
+
+            if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+               ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U')
+            {
+                vowel++;
+            }
+            else if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
+            {
+                consonant++;
+            }
+        }
+
+        System.out.println("Vowels = " + vowel);
+        System.out.println("Consonants = " + consonant);
+    }
+}
+
+8. Write a program to read a string and check whether it is a palindrome.
+
+import java.util.Scanner;
+
+public class Palindrome
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String s = sc.nextLine();
+
+        boolean palindrome = true;
+
+        for(int i = 0; i < s.length() / 2; i++)
+        {
+            if(s.charAt(i) != s.charAt(s.length() - 1 - i))
+            {
+                palindrome = false;
+                break;
+            }
+        }
+
+        if(palindrome)
+            System.out.println("Palindrome");
+        else
+            System.out.println("Not Palindrome");
+    }
+}
+
+9. Write a program to read the number of rows n and print an inverted right-angled triangle using stars (*).
+
+import java.util.Scanner;
+
+public class Inverted_Triangle 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of rows:");
+        int n=sc.nextInt();
+
+        for(int i = n; i >= 1; i--)
+        {
+            for(int j = 1; j <= i; j++)
+            {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }    
+}
+
+10. Write a Java program to create a method:
+swap(int[] a, int i, int j)
+
+
+import java.util.Scanner;
+
+public class Array_Swap
+{
+    static void swap(int[] a, int i, int j)
+    {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j]= temp;
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements:");
+        int n=sc.nextInt();
+        int a[]=new int[n];
+        System.out.println("Enter elements:");
+
+        for(int i=0; i< a.length; i++)
+        {
+            a[i]=sc.nextInt();
+        }
+        swap(a, 0, a.length-1);
+
+        System.out.print("Array after swaping:");
+
+        for(int i=0; i< a.length; i++)
+        {
+            System.out.print(a[i]+"");
+        }
+    }
+    
+    
+}
+
+11. Write a program to find the second largest distinct element in an array.
+
+import java.util.Scanner;
+
+public class SecondLargest
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+
+        int a[] = new int[n];
+
+        System.out.println("Enter elements:");
+
+        for(int i = 0; i < a.length; i++)
+        {
+            a[i] = sc.nextInt();
+        }
+
+        int largest = a[0];
+        int second = 0;
+        boolean found = false;
+
+        for(int i = 1; i < a.length; i++)
+        {
+            if(a[i] > largest)
+            {
+                second = largest;
+                largest = a[i];
+                found = true;
+            }
+            else if(a[i] < largest)
+            {
+                if(!found || a[i] > second)
+                {
+                    second = a[i];
+                    found = true;
+                }
+            }
+        }
+
+        if(found)
+            System.out.println("Second largest = " + second);
+        else
+            System.out.println("-1");
+    }
+}
+
+12. Write a program to read an array and print each distinct element along with the number of times it appears.
+
+import java.util.Scanner;
+
+public class Frequency
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+
+        int a[] = new int[n];
+
+        System.out.println("Enter elements:");
+
+        for(int i = 0; i < a.length; i++)
+        {
+            a[i] = sc.nextInt();
+        }
+
+        for(int i = 0; i < a.length; i++)
+        {
+            int count = 0;
+            boolean alreadyPrinted = false;
+
+            // Check if element was already printed
+            for(int j = 0; j < i; j++)
+            {
+                if(a[i] == a[j])
+                {
+                    alreadyPrinted = true;
+                    break;
+                }
+            }
+
+            if(alreadyPrinted)
+                continue;
+
+            // Count occurrence
+            for(int j = 0; j < a.length; j++)
+            {
+                if(a[i] == a[j])
+                    count++;
+            }
+
+            System.out.println(a[i] + " = " + count);
+        }
+    }
+}
+
+13. 

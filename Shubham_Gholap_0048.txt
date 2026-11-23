@@ -1,0 +1,304 @@
+//Name:- Shubham Rajendra Gholap
+//PRN:- 260843420048
+
+------------------------------------------------------------------------------------------
+
+1) Infix → Postfix – Fill in the Blanks
+
+package Stack_Examples;
+
+import java.util.Scanner;
+
+public class IntoPost
+{
+    static char s[] = new char[100];
+    static int tos, maxsize;
+
+    static void createStack(int n)
+    {
+        maxsize = n;
+        tos = -1;
+    }
+
+    static void push(char e)
+    {
+        tos++;
+        s[tos] = e;
+    }
+
+    static char pop()
+    {
+        char temp = s[tos];
+        tos--;
+        return temp;
+    }
+
+    static boolean isEmpty()
+    {
+        return tos == -1;
+    }
+
+    static int prec(char ch)
+    {
+        if (ch == '+' || ch == '-')
+            return 1;
+
+        if (ch == '*' || ch == '/' || ch == '%')
+            return 2;
+
+        return 0;
+    }
+
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+
+        char in[], post[] = new char[100];
+        char c;
+        int pi = 0;
+
+        System.out.print("Enter infix: ");
+        String input = sc.next();
+
+        in = input.toCharArray();
+
+        createStack(in.length);
+
+        for (int i = 0; i < in.length; i++)
+        {
+            c = in[i];
+
+            switch (c)
+            {
+                case '(':
+                    push(c);
+                    break;
+
+                case ')':
+                    while (!isEmpty() && s[tos] != '(')
+                    {
+                        post[pi] = pop();
+                        pi++;
+                    }
+
+                    if (!isEmpty())
+                        pop();
+
+                    break;
+
+                case '+':
+                case '-':
+                case '*':
+                case '/':
+                case '%':
+
+                    while (!isEmpty() &&
+                           prec(c) <= prec(s[tos]))
+                    {
+                        post[pi] = pop();
+                        pi++;
+                    }
+
+                    push(c);
+                    break;
+
+                default:
+                    post[pi] = c;
+                    pi++;
+                    break;
+            }
+        }
+
+        while (!isEmpty())
+        {
+            post[pi] = pop();
+            pi++;
+        }
+
+        System.out.println(
+            "Postfix is " + new String(post, 0, pi)
+        );
+
+        sc.close();
+    }
+}
+
+-----------------------------------------------------------------------------------------
+
+2) Infix → Prefix – Fill in the Blanks
+
+package Stack_Examples;
+
+import java.util.Scanner;
+
+public class IntoPre
+{
+    static char s[] = new char[100];
+    static int tos, maxsize;
+
+    static void createStack(int n)
+    {
+        maxsize = n;
+        tos = -1;
+    }
+
+    static void push(char e)
+    {
+        tos++;
+        s[tos] = e;
+    }
+
+    static char pop()
+    {
+        char temp = s[tos];
+        tos--;
+        return temp;
+    }
+
+    static boolean isEmpty()
+    {
+        return tos == -1;
+    }
+
+    static int prec(char ch)
+    {
+        if (ch == '+' || ch == '-')
+            return 1;
+
+        if (ch == '*' || ch == '/' || ch == '%')
+            return 2;
+
+        return 0;
+    }
+
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+
+        char in[], pre[] = new char[100];
+        char c;
+        int pi = 0;
+
+        System.out.print("Enter infix: ");
+        String input = sc.next();
+
+        in = input.toCharArray();
+
+        createStack(in.length);
+
+        // Scan from RIGHT to LEFT
+        for (int i = in.length - 1; i >= 0; i--)
+        {
+            c = in[i];
+
+            switch (c)
+            {
+                case ')':
+                    push(c);
+                    break;
+
+                case '(':
+                    while (!isEmpty() && s[tos] != ')')
+                    {
+                        pre[pi] = pop();
+                        pi++;
+                    }
+
+                    if (!isEmpty())
+                        pop();
+
+                    break;
+
+                case '+':
+                case '-':
+                case '*':
+                case '/':
+                case '%':
+
+                    while (!isEmpty() &&
+                           prec(c) < prec(s[tos]))
+                    {
+                        pre[pi] = pop();
+                        pi++;
+                    }
+
+                    push(c);
+                    break;
+
+                default:
+                    pre[pi] = c;
+                    pi++;
+                    break;
+            }
+        }
+
+        while (!isEmpty())
+        {
+            pre[pi] = pop();
+            pi++;
+        }
+
+        String prefix =
+            new StringBuilder(
+                new String(pre, 0, pi)
+            ).reverse().toString();
+
+        System.out.println(
+            "Prefix is " + prefix
+        );
+
+        sc.close();
+    }
+}
+
+---------------------------------------------------------------------------------------
+
+3) Logic Check – Students Fill the Answers
+
+1. In Postfix conversion, the expression is scanned from "left" to "right".
+
+2. In Prefix conversion, the expression is scanned from "right" to "left".
+
+3.  In Postfix conversion, when an incoming operator has equal precedence, the supplied logic uses "<=" .
+
+4. In Prefix conversion, the supplied logic uses "<" for the precedence comparison.
+
+5. The precedence value of + and - is "1".
+
+6. The precedence value of *, / and % is "2".
+
+7. Opening bracket in Postfix is "push" onto the stack.
+
+8. Closing bracket in Postfix causes operators to be "pop" until '('.
+
+9. In Prefix conversion, ')' is pushed and '(' causes popping until ")" is found.
+
+10. At the end of either conversion, remaining stack operators are pop.
+
+---------------------------------------------------------------------------------------
+
+4) Practice Test.
+
+Q1. Convert A+B*C into Postfix and Prefix.
+
+Enter infix: A+B*C
+Postfix is --> ABC*+
+Prefix is --> +A*BC
+
+Q2. Convert (A+B)*C into Postfix and Prefix.
+
+Enter infix: (A+B)*C
+Postfix is --> AB+C*
+Prefix is --> *+ABC
+
+Q3. Convert A+B*C-D into Postfix and Prefix.
+
+Enter infix: A+B*C-D
+Postfix is --> ABC*+D-
+Prefix is --> -+A*BCD
+
+Q4. Convert (A+B)*(C-D) into Postfix and Prefix.
+
+Enter infix: (A+B)*(C-D)
+Postfix is --> AB+CD-*
+Prefix is --> *+AB-CD
